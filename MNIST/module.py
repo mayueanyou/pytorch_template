@@ -4,6 +4,18 @@ import torch.nn.functional as F
 
 from pytorch_template import*
 
+class FNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.name = type(self).__name__
+        
+        self.fc = FeedForwardLayer(784,10)
+    
+    def forward(self,x):
+        x = x.view(-1, 784)
+        x = self.fc(x)
+        return x,x
+
 class FNN_1(nn.Module):
     def __init__(self):
         super().__init__()

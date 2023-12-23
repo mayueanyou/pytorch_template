@@ -3,6 +3,14 @@ from torch import nn
 import torch.nn.functional as F
 from einops import rearrange
 
+class FeedForwardLayer(nn.Module):
+    def __init__(self, dim, hidden_dim):
+        super().__init__()
+        self.layer = nn.Sequential(nn.Linear(dim, hidden_dim),nn.GELU(),nn.Linear(hidden_dim, dim))
+
+    def forward(self, x):
+        return self.layer(x)
+
 class Residual(nn.Module):
     def __init__(self, layers,transform=None):
         super().__init__()
